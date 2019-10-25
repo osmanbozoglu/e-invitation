@@ -16,9 +16,14 @@ const AppStack = createBottomTabNavigator({
   Comp1: Comp1
 });
 
-const AuthStack = createStackNavigator({
-  SignIn: SignIn
-});
+const AuthStack = createStackNavigator(
+  {
+    SignIn: SignIn
+  },
+  {
+    headerMode: "none"
+  }
+);
 
 export const RootNavigator = () => {
   return createAppContainer(
@@ -28,7 +33,7 @@ export const RootNavigator = () => {
         Auth: AuthStack
       },
       {
-        initialRouteName: "App"
+        initialRouteName: "Auth"
       }
     )
   );
