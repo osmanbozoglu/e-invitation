@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, Button, Platform } from "react-native";
 
 import Input from "../../utils/forms/input";
+import Validation from "../../utils/forms/validation";
 class AuthFrom extends React.Component {
   state = {
     type: "Login",
@@ -77,12 +78,49 @@ class AuthFrom extends React.Component {
     let formCopy = this.state.form;
     formCopy[name].value = value;
 
+    let rules = formCopy[name].rules;
+    let valid = Validation(value, rules, formCopy);
+
+    console.log(valid);
+
+    formCopy[name].valid = valid;
+
     this.setState({
       form: formCopy
     });
   };
 
-  submitUser = () => {};
+  submitUser = () => {
+    let isFormValid = true;
+    let formToSubmit = {};
+    const formCopy = this.state.form;
+
+    for (let key in formCopy) {
+      if (this.state.type === "Login") {
+        //Login
+        if (key !== "confirmPassword") {
+          isFormValid = isFormValid && formCopy[key].valid;
+          formToSubmit[key] = formCopy[key].value;
+        }
+      } else {
+        //Reigster
+        isFormValid = isFormValid && formCopy[key].valid;
+        formToSubmit[key] = formCopy[key].value;
+      }
+    }
+
+    if (isFormValid) {
+      if (this.state.type === "Login") {
+        console.log(formToSubmit);
+      } else {
+        console.log(formToSubmit);
+      }
+    } else {
+      this.setState({
+        hasErrors: true
+      });
+    }
+  };
 
   render() {
     return (
@@ -122,6 +160,14 @@ class AuthFrom extends React.Component {
             <Button
               title={this.state.actionMode}
               onPress={this.changeFormType}
+              color={"red"}
+            />
+          </View>
+
+          <View style={styles.button}>
+            <Button
+              title="Home Page"
+              onPress={() => this.props.goNext()}
               color={"red"}
             />
           </View>

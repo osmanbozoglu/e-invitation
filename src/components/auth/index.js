@@ -14,6 +14,10 @@ class AuthComponent extends React.Component {
   state = {
     loading: false
   };
+
+  goNext = () => {
+    this.props.navigation.navigate("App");
+  };
   render() {
     if (this.state.loading) {
       return (
@@ -26,7 +30,7 @@ class AuthComponent extends React.Component {
         <ScrollView style={styles.container}>
           <View>
             <AuthLogo />
-            <AuthForm />
+            <AuthForm goNext={this.goNext} />
           </View>
         </ScrollView>
       );
