@@ -18,10 +18,23 @@ const AppStack = createBottomTabNavigator({
 
 const AuthStack = createStackNavigator(
   {
-    SignIn: SignIn
+    SignIn: {
+      screen: SignIn,
+      navigationOptions: navigation => ({
+        headerTitle: "E-Invitation"
+      })
+    }
   },
   {
-    headerMode: "none"
+    defaultNavigationOptions: {
+      headerStyle: { backgroundColor: "#ff0000" },
+      headerTintColor: "black",
+      headerTitleStyle: {
+        flex: 1,
+        textAlign: "center",
+        fontWeight: "bold"
+      }
+    }
   }
 );
 

@@ -37,7 +37,7 @@ class AuthComponent extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#1d428a",
+    backgroundColor: "white",
     padding: 50
   },
   loading: {

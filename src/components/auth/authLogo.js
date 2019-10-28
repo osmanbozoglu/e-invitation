@@ -1,17 +1,17 @@
 import React from "react";
 import { View, Image } from "react-native";
 
-import LogoImage from "../../../assets/images/nba_login_logo.png";
+import Logo from "../../../assets/images/logo.png";
 
 const LogoComponent = () => {
   return (
     <View style={{ alignItems: "center" }}>
       <Image
-        source={LogoImage}
+        source={Logo}
         resizeMode={"center"}
         style={{
-          width: 170,
-          height: 150
+          width: "50%",
+          height: 200
         }}
       />
     </View>
