@@ -11,9 +11,40 @@ import SignIn from "./src/components/auth";
 import Comp1 from "./src/components/component1";
 import Comp2 from "./src/components/component2";
 
+import CompOne from "./src/components/component1/compone";
+import CompTwo from "./src/components/component2/comptwo";
+
+import Logo from "./src/utils/logo";
+const headerConf = {
+  headerLayoutPreset: "center",
+  defaultNavigationOptions: {
+    headerStyle: {
+      backgroundColor: "red"
+    },
+    headerTintColor: "black",
+    headerTitle: Logo
+  }
+};
+
+const CompOneStack = createStackNavigator(
+  {
+    Comp1: Comp1,
+    CompOne: CompOne
+  },
+  headerConf
+);
+
+const CompTwoStack = createStackNavigator(
+  {
+    Comp2: Comp2,
+    CompTwo: CompTwo
+  },
+  headerConf
+);
+
 const AppStack = createBottomTabNavigator({
-  Comp2: Comp2,
-  Comp1: Comp1
+  Comp1: CompOneStack,
+  Comp2: CompTwoStack
 });
 
 const AuthStack = createStackNavigator(

@@ -3,7 +3,8 @@ import { View, Text, StyleSheet, Button, Platform } from "react-native";
 
 import Input from "../../utils/forms/input";
 import Validation from "../../utils/forms/validation";
-class AuthFrom extends React.Component {
+
+class AuthForm extends React.Component {
   state = {
     type: "Login",
     action: "Login",
@@ -111,9 +112,9 @@ class AuthFrom extends React.Component {
 
     if (isFormValid) {
       if (this.state.type === "Login") {
-        console.log(formToSubmit);
+        this.props.signIn(formToSubmit);
       } else {
-        console.log(formToSubmit);
+        this.props.signUp(formToSubmit);
       }
     } else {
       this.setState({
@@ -202,4 +203,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AuthFrom;
+export default AuthForm;
