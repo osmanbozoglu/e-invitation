@@ -1,7 +1,7 @@
-import React from "react";
-import { Image } from "react-native";
+import React from 'react';
+import { Image } from 'react-native';
 
-import LogoImg from "../../assets/images/logo.png";
+import LogoImg from '../../assets/images/logo.png';
 const LogoTitle = () => (
   <Image
     source={LogoImg}

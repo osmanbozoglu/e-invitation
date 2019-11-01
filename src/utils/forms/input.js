@@ -1,11 +1,11 @@
-import React from "react";
-import { StyleSheet, Text, View, TextInput, Picker } from "react-native";
+import React from 'react';
+import { StyleSheet, Text, View, TextInput, Picker } from 'react-native';
 
 const input = props => {
   let template = null;
 
   switch (props.type) {
-    case "textinput":
+    case 'textinput':
       template = (
         <TextInput {...props} style={[styles.input, props.overrideStyle]} />
       );
@@ -20,9 +20,9 @@ const input = props => {
 
 const styles = StyleSheet.create({
   input: {
-    width: "100%",
+    width: '100%',
     borderBottomWidth: 1,
-    borderBottomColor: "#eaeaea",
+    borderBottomColor: '#eaeaea',
     fontSize: 16,
     padding: 5,
     marginTop: 10

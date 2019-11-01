@@ -1,27 +1,27 @@
-import React from "react";
-import { Platform } from "react-native";
+import React from 'react';
+import { Platform } from 'react-native';
 
-import { createAppContainer, createSwitchNavigator } from "react-navigation";
-import { createStackNavigator } from "react-navigation-stack";
-import { createDrawerNavigator } from "react-navigation-drawer";
-import { createBottomTabNavigator } from "react-navigation-tabs";
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 //SCREENS
-import SignIn from "./src/components/auth";
-import Comp1 from "./src/components/component1";
-import Comp2 from "./src/components/component2";
+import SignIn from './src/components/auth';
+import Comp1 from './src/components/component1';
+import Comp2 from './src/components/component2';
 
-import CompOne from "./src/components/component1/compone";
-import CompTwo from "./src/components/component2/comptwo";
+import CompOne from './src/components/component1/compone';
+import CompTwo from './src/components/component2/comptwo';
 
-import Logo from "./src/utils/logo";
+import Logo from './src/utils/logo';
 const headerConf = {
-  headerLayoutPreset: "center",
+  headerLayoutPreset: 'center',
   defaultNavigationOptions: {
     headerStyle: {
-      backgroundColor: "red"
+      backgroundColor: 'red'
     },
-    headerTintColor: "black",
+    headerTintColor: 'black',
     headerTitle: Logo
   }
 };
@@ -42,28 +42,39 @@ const CompTwoStack = createStackNavigator(
   headerConf
 );
 
-const AppStack = createBottomTabNavigator({
-  Comp1: CompOneStack,
-  Comp2: CompTwoStack
-});
+const AppStack = createBottomTabNavigator(
+  {
+    Comp1: CompOneStack,
+    Comp2: CompTwoStack
+  },
+  {
+    tabBarOptions: {
+      activeTintColor: 'white',
+      showLabel: false,
+      activeBackgroundColor: 'red',
+      inactiveBackgroundColor: 'white',
+      style: {
+        backgroundColor: 'white'
+      }
+    }
+  }
+);
 
 const AuthStack = createStackNavigator(
   {
     SignIn: {
-      screen: SignIn,
-      navigationOptions: navigation => ({
-        headerTitle: "E-Invitation"
-      })
+      screen: SignIn
     }
   },
   {
+    headerMode: 'none',
     defaultNavigationOptions: {
-      headerStyle: { backgroundColor: "#ff0000" },
-      headerTintColor: "black",
+      headerStyle: { backgroundColor: '#ff0000' },
+      headerTintColor: 'black',
       headerTitleStyle: {
         flex: 1,
-        textAlign: "center",
-        fontWeight: "bold"
+        textAlign: 'center',
+        fontWeight: 'bold'
       }
     }
   }
@@ -77,7 +88,7 @@ export const RootNavigator = () => {
         Auth: AuthStack
       },
       {
-        initialRouteName: "Auth"
+        initialRouteName: 'Auth'
       }
     )
   );

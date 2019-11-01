@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 import {
   StyleSheet,
   View,
   Text,
   ScrollView,
   ActivityIndicator
-} from "react-native";
+} from 'react-native';
 
-import AuthLogo from "./authLogo";
-import AuthForm from "./authForm";
+import AuthLogo from './authLogo';
+import AuthForm from './authForm';
 
 class AuthComponent extends React.Component {
   state = {
@@ -16,7 +16,7 @@ class AuthComponent extends React.Component {
   };
 
   goNext = () => {
-    this.props.navigation.navigate("App");
+    this.props.navigation.navigate('App');
   };
   render() {
     if (this.state.loading) {
@@ -41,14 +41,14 @@ class AuthComponent extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: 'white',
     padding: 50
   },
   loading: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });
 
