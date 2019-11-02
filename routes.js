@@ -3,60 +3,97 @@ import { Platform } from 'react-native';
 
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import { createDrawerNavigator } from 'react-navigation-drawer';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-
+import Logo from './src/utils/logo';
 //SCREENS
 import SignIn from './src/components/auth';
-import Comp1 from './src/components/component1';
-import Comp2 from './src/components/component2';
+import Home from './src/components/home/home';
+import Profile from './src/components/profile/profile';
+import Contacts from './src/components/contact/contact';
+import Cards from './src/components/card/card';
 
-import CompOne from './src/components/component1/compone';
-import CompTwo from './src/components/component2/comptwo';
-
-import Logo from './src/utils/logo';
 const headerConf = {
   headerLayoutPreset: 'center',
   defaultNavigationOptions: {
     headerStyle: {
-      backgroundColor: 'red'
+      backgroundColor: '#20b2aa'
     },
     headerTintColor: 'black',
-    headerTitle: Logo
+    headerTitle: 'E-Invitation'
   }
 };
 
-const CompOneStack = createStackNavigator(
+const HomeStack = createStackNavigator(
   {
-    Comp1: Comp1,
-    CompOne: CompOne
+    Home: Home
   },
   headerConf
 );
-
-const CompTwoStack = createStackNavigator(
+const ContactStack = createStackNavigator(
   {
-    Comp2: Comp2,
-    CompTwo: CompTwo
+    Contacts: Contacts
+  },
+  headerConf
+);
+const CardStack = createStackNavigator(
+  {
+    Cards: Cards
+  },
+  headerConf
+);
+const ProfileStack = createStackNavigator(
+  {
+    Profile: Profile
   },
   headerConf
 );
 
 const AppStack = createBottomTabNavigator(
   {
-    Comp1: CompOneStack,
-    Comp2: CompTwoStack
+    Home: {
+      screen: HomeStack
+    },
+    Contacts: {
+      screen: ContactStack
+    },
+    Cards: {
+      screen: CardStack
+    },
+    Profile: {
+      screen: ProfileStack
+    }
   },
   {
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        const { routeName } = navigation.state;
+        let iconName;
+        if (routeName === 'Home') {
+          iconName = Platform.OS === 'ios' ? 'ios-home' : 'md-home';
+        } else if (routeName === 'Contacts') {
+          iconName = Platform.OS === 'ios' ? 'ios-contacts' : 'md-contacts';
+        } else if (routeName === 'Cards') {
+          iconName = Platform.OS === 'ios' ? 'ios-card' : 'md-card';
+        } else if (routeName === 'Profile') {
+          iconName = Platform.OS === 'ios' ? 'ios-person' : 'md-person';
+        }
+
+        // You can return any component that you like here! We usually use an
+        // icon component from react-native-vector-icons
+        return <Ionicons name={iconName} size={25} color={tintColor} />;
+      }
+    }),
     tabBarOptions: {
-      activeTintColor: 'white',
+      activeTintColor: 'black',
       showLabel: false,
-      activeBackgroundColor: 'red',
+      activeBackgroundColor: '#20b2aa',
       inactiveBackgroundColor: 'white',
       style: {
-        backgroundColor: 'white'
+        backgroundColor: '#20b2aa'
       }
-    }
+    },
+    initialRouteName: 'Home'
   }
 );
 
@@ -67,16 +104,7 @@ const AuthStack = createStackNavigator(
     }
   },
   {
-    headerMode: 'none',
-    defaultNavigationOptions: {
-      headerStyle: { backgroundColor: '#ff0000' },
-      headerTintColor: 'black',
-      headerTitleStyle: {
-        flex: 1,
-        textAlign: 'center',
-        fontWeight: 'bold'
-      }
-    }
+    headerMode: 'none'
   }
 );
 
@@ -88,7 +116,7 @@ export const RootNavigator = () => {
         Auth: AuthStack
       },
       {
-        initialRouteName: 'Auth'
+        initialRouteName: 'App'
       }
     )
   );
