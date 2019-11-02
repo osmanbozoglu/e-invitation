@@ -5,7 +5,7 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import Logo from './src/utils/logo';
+
 //SCREENS
 import SignIn from './src/components/auth';
 import Home from './src/components/home/home';
@@ -87,11 +87,8 @@ const AppStack = createBottomTabNavigator(
     tabBarOptions: {
       activeTintColor: 'black',
       showLabel: false,
-      activeBackgroundColor: '#20b2aa',
-      inactiveBackgroundColor: 'white',
-      style: {
-        backgroundColor: '#20b2aa'
-      }
+      activeBackgroundColor: '#D99C9C',
+      inactiveBackgroundColor: '#F0F2F2'
     },
     initialRouteName: 'Home'
   }

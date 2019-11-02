@@ -177,7 +177,7 @@ class AuthForm extends React.Component {
             <Button
               title={this.state.action}
               onPress={this.submitUser}
-              color={'#20b2aa'}
+              color={'#D99C9C'}
             />
           </View>
 
@@ -185,7 +185,7 @@ class AuthForm extends React.Component {
             <Button
               title={this.state.actionMode}
               onPress={this.changeFormType}
-              color={'#20b2aa'}
+              color={'#D99C9C'}
             />
           </View>
 
