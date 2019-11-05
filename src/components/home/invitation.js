@@ -12,6 +12,11 @@ import { Ionicons } from 'react-native-vector-icons';
 import InvCard from '../../../assets/images/inv.jpeg';
 
 class Invitation extends React.Component {
+  static navigationOptions = () => {
+    return {
+      title: 'Invitation'
+    };
+  };
   state = {
     switchValue: false
   };

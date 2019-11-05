@@ -17,9 +17,7 @@ import Notification from './src/components/home/notification';
 
 const headerConf = {
   headerLayoutPreset: 'center',
-  navigationOptions: {
-    headerRight: () => <Button title={'Hello'} onPress={Alert.alert('Hello')} />
-  },
+
   defaultNavigationOptions: {
     headerStyle: {
       backgroundColor: '#20b2aa'

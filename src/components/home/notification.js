@@ -5,39 +5,29 @@ import {
   TouchableHighlight,
   View,
   Text,
-  Alert
+  Alert,
+  Dimensions
 } from 'react-native';
 
 class Notification extends React.Component {
   static navigationOptions = {
     title: 'Notification'
   };
-  state = {
-    modalVisible: false
-  };
-
-  setModalVisible(visible) {
-    this.setState({ modalVisible: visible });
-  }
-
   render() {
     return (
-      <View style={{ marginTop: 22 }}>
+      <View>
         <Modal
           animationType="slide"
           transparent={false}
-          visible={this.state.modalVisible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-          }}
+          visible={this.props.isModalOpened}
         >
-          <View style={{ marginTop: 22 }}>
-            <View>
+          <View style={styles.modalContent}>
+            <View style={{ marginTop: 50, backgroundColor: 'yellow' }}>
               <Text>Hello World!</Text>
 
               <TouchableHighlight
                 onPress={() => {
-                  this.setModalVisible(!this.state.modalVisible);
+                  this.props.toggleModal(false);
                 }}
               >
                 <Text>Hide Modal</Text>
@@ -45,20 +35,22 @@ class Notification extends React.Component {
             </View>
           </View>
         </Modal>
-
-        <TouchableHighlight
-          onPress={() => {
-            this.setModalVisible(true);
-          }}
-        >
-          <Text>Show Modal</Text>
-        </TouchableHighlight>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  modalContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 20,
+    backgroundColor: 'yellow',
+
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
