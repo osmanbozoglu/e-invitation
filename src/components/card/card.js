@@ -2,6 +2,9 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
 class Card extends React.Component {
+  static navigationOptions = {
+    title: 'Cards'
+  };
   render() {
     return (
       <View style={styles.container}>

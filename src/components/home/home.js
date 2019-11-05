@@ -1,9 +1,27 @@
 import React from 'react';
-import { StyleSheet, View, Text, Alert } from 'react-native';
+import { StyleSheet, View, Button, Alert } from 'react-native';
 import { ListItem } from 'react-native-elements';
+import { AntDesign } from 'react-native-vector-icons/';
 import Swipeout from 'react-native-swipeout';
 
+import Notification from './notification';
+
 class Home extends React.Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: 'Home',
+      headerRight: () => (
+        <AntDesign
+          name={'notification'}
+          onPress={() => {
+            <Notification />;
+          }}
+          size={22}
+          style={{ right: 10 }}
+        />
+      )
+    };
+  };
   render() {
     const swipeButtons = [
       {

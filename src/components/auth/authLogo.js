@@ -8,7 +8,6 @@ const LogoComponent = () => {
     <View style={{ alignItems: 'center' }}>
       <Image
         source={Logo}
-        //resizeMode={"center"}
         style={{
           width: 200,
           height: 200

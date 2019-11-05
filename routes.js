@@ -13,12 +13,16 @@ import Profile from './src/components/profile/profile';
 import Contacts from './src/components/contact/contact';
 import Cards from './src/components/card/card';
 import Invitation from './src/components/home/invitation';
+import Notification from './src/components/home/notification';
 
 const headerConf = {
   headerLayoutPreset: 'center',
+  navigationOptions: {
+    headerRight: () => <Button title={'Hello'} onPress={Alert.alert('Hello')} />
+  },
   defaultNavigationOptions: {
     headerStyle: {
-      backgroundColor: '#20b2aa' //#20b2aa
+      backgroundColor: '#20b2aa'
     },
     headerTintColor: 'black'
   }
@@ -27,9 +31,9 @@ const headerConf = {
 const HomeStack = createStackNavigator(
   {
     Home: Home,
-    Invitation: Invitation
+    Invitation: Invitation,
+    Notification: Notification
   },
-
   headerConf
 );
 const ContactStack = createStackNavigator(

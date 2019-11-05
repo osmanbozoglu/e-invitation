@@ -35,7 +35,7 @@ class Invitation extends React.Component {
           <Switch
             onValueChange={this.toggleSwitch}
             value={this.state.switchValue}
-            trackColor={{ true: 'blue', false: null }}
+            trackColor={{ true: '#20b2aa', false: null }}
             thumbColor="black"
             size={25}
           />

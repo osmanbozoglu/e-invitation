@@ -2,6 +2,9 @@ import React from 'react';
 import { StyleSheet, View, Text, Platform } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 class Contacts extends React.Component {
+  static navigationOptions = {
+    title: 'Contacts'
+  };
   state = {
     search: ''
   };
