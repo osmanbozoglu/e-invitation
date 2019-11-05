@@ -2,7 +2,7 @@ import React from 'react';
 import { Platform } from 'react-native';
 
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createStackNavigator, HeaderTitle } from 'react-navigation-stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
@@ -12,22 +12,24 @@ import Home from './src/components/home/home';
 import Profile from './src/components/profile/profile';
 import Contacts from './src/components/contact/contact';
 import Cards from './src/components/card/card';
+import Invitation from './src/components/home/invitation';
 
 const headerConf = {
   headerLayoutPreset: 'center',
   defaultNavigationOptions: {
     headerStyle: {
-      backgroundColor: '#20b2aa'
+      backgroundColor: '#20b2aa' //#20b2aa
     },
-    headerTintColor: 'black',
-    headerTitle: 'E-Invitation'
+    headerTintColor: 'black'
   }
 };
 
 const HomeStack = createStackNavigator(
   {
-    Home: Home
+    Home: Home,
+    Invitation: Invitation
   },
+
   headerConf
 );
 const ContactStack = createStackNavigator(
@@ -87,7 +89,7 @@ const AppStack = createBottomTabNavigator(
     tabBarOptions: {
       activeTintColor: 'black',
       showLabel: false,
-      activeBackgroundColor: '#D99C9C',
+      activeBackgroundColor: '#20b2aa',
       inactiveBackgroundColor: '#F0F2F2'
     },
     initialRouteName: 'Home'
