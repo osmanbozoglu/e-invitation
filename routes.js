@@ -2,9 +2,14 @@ import React from 'react';
 import { Platform } from 'react-native';
 
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { createStackNavigator, HeaderTitle } from 'react-navigation-stack';
+import { createStackNavigator } from 'react-navigation-stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+import Entypo from 'react-native-vector-icons/Entypo';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {
+  createBottomTabNavigator,
+  createMaterialTopTabNavigator
+} from 'react-navigation-tabs';
 
 //SCREENS
 import SignIn from './src/components/auth';
@@ -14,17 +19,7 @@ import Contacts from './src/components/contact/contact';
 import Cards from './src/components/card/card';
 import Invitation from './src/components/home/invitation';
 import Notification from './src/components/home/notification';
-
-const headerConf = {
-  headerLayoutPreset: 'center',
-
-  defaultNavigationOptions: {
-    headerStyle: {
-      backgroundColor: '#20b2aa'
-    },
-    headerTintColor: 'black'
-  }
-};
+import MyContacts from './src/components/contact/myContacts';
 
 const HomeStack = createStackNavigator(
   {
@@ -32,25 +27,93 @@ const HomeStack = createStackNavigator(
     Invitation: Invitation,
     Notification: Notification
   },
-  headerConf
+  {
+    headerLayoutPreset: 'center',
+
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#20b2aa'
+      },
+      headerTintColor: 'black'
+    }
+  }
+);
+const ContactTab = createMaterialTopTabNavigator(
+  {
+    MyContacts: { screen: MyContacts },
+    Contacts: { screen: Contacts }
+  },
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        console.log(navigation.state);
+        const { routeName } = navigation.state;
+        let iconName;
+        if (routeName === 'MyContacts') {
+          iconName = 'add-user';
+          return <Entypo name={iconName} size={25} color={tintColor} />;
+        } else if (routeName === 'Contacts') {
+          iconName = 'group';
+          return <FontAwesome name={iconName} size={25} color={tintColor} />;
+        }
+      }
+    }),
+    initialRouteName: 'Contacts',
+    order: ['Contacts', 'MyContacts'],
+    swipeEnabled: true,
+
+    tabBarOptions: {
+      activeTintColor: 'black',
+      showLabel: false,
+      activeBackgroundColor: '#20b2aa',
+      showIcon: true,
+      inactiveBackgroundColor: '#F0F2F2',
+      tabStyle: {
+        marginTop: 25,
+        backgroundColor: '#20b2aa'
+      }
+    }
+  }
 );
 const ContactStack = createStackNavigator(
   {
+    ContactTab: ContactTab,
     Contacts: Contacts
   },
-  headerConf
+  {
+    headerMode: 'none'
+  }
 );
+
 const CardStack = createStackNavigator(
   {
     Cards: Cards
   },
-  headerConf
+  {
+    headerLayoutPreset: 'center',
+
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#20b2aa'
+      },
+      headerTintColor: 'black'
+    }
+  }
 );
 const ProfileStack = createStackNavigator(
   {
     Profile: Profile
   },
-  headerConf
+  {
+    headerLayoutPreset: 'center',
+
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#20b2aa'
+      },
+      headerTintColor: 'black'
+    }
+  }
 );
 
 const AppStack = createBottomTabNavigator(
@@ -92,9 +155,10 @@ const AppStack = createBottomTabNavigator(
       activeTintColor: 'black',
       showLabel: false,
       activeBackgroundColor: '#20b2aa',
-      inactiveBackgroundColor: '#F0F2F2'
+      inactiveBackgroundColor: '#F0F2F2',
+      swipeEnabled: true
     },
-    initialRouteName: 'Home'
+    initialRouteName: 'Contacts'
   }
 );
 

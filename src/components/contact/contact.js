@@ -2,9 +2,6 @@ import React from 'react';
 import { StyleSheet, View, Text, Platform } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 class Contacts extends React.Component {
-  static navigationOptions = {
-    title: 'Contacts'
-  };
   state = {
     search: ''
   };
@@ -25,14 +22,5 @@ class Contacts extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-});
 
 export default Contacts;
