@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   ImageBackground,
   StyleSheet,
@@ -7,14 +7,22 @@ import {
   Platform,
   Alert,
   Switch
-} from 'react-native';
-import { Ionicons } from 'react-native-vector-icons';
-import InvCard from '../../../assets/images/inv.jpeg';
+} from "react-native";
+import { Ionicons } from "react-native-vector-icons";
+import InvCard from "../../../assets/images/inv.jpeg";
 
 class Invitation extends React.Component {
   static navigationOptions = () => {
     return {
-      title: 'Invitation'
+      title: "Invitation",
+      headerRight: () => (
+        <Ionicons
+          name={Platform.OS === "ios" ? "ios-navigate" : "md-navigate"}
+          size={25}
+          onPress={() => Alert.alert("Hello")}
+          style={{ paddingRight: 30 }}
+        />
+      )
     };
   };
   state = {
@@ -32,15 +40,15 @@ class Invitation extends React.Component {
         </View>
         <View style={styles.icons}>
           <Ionicons
-            name={Platform.OS === 'ios' ? 'ios-navigate' : 'md-navigate'}
+            name={Platform.OS === "ios" ? "ios-navigate" : "md-navigate"}
             size={25}
-            onPress={() => Alert.alert('Hello')}
+            onPress={() => Alert.alert("Hello")}
             style={{ paddingRight: 30 }}
           />
           <Switch
             onValueChange={this.toggleSwitch}
             value={this.state.switchValue}
-            trackColor={{ true: '#20b2aa', false: null }}
+            trackColor={{ true: "#20b2aa", false: null }}
             thumbColor="black"
             size={25}
           />
@@ -52,20 +60,20 @@ class Invitation extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
+    flexDirection: "row",
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center"
   },
   img: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height
   },
   icons: {
     top: 0,
-    position: 'absolute',
-    flexDirection: 'row',
-    alignItems: 'flex-end',
+    position: "absolute",
+    flexDirection: "row",
+    alignItems: "flex-end",
     right: 30
   }
 });

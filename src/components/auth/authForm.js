@@ -1,78 +1,100 @@
-import React from 'react';
-import { View, Text, StyleSheet, Button, Platform } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet, Button, Platform } from "react-native";
 
-import Input from '../../utils/forms/input';
-import Validation from '../../utils/forms/validation';
+import Input from "../../utils/forms/input";
+import Validation from "../../utils/forms/validation";
 
 class AuthForm extends React.Component {
   state = {
-    type: 'Login',
-    action: 'Login',
-    actionMode: 'Register',
+    type: "Login",
+    action: "Login",
+    actionMode: "Register",
     hasErrors: false,
     form: {
-      username: {
-        value: '',
+      name: {
+        value: "",
         valid: false,
-        type: 'textinput',
+        type: "textinput",
         rules: {
           isRequired: true,
           minLength: 3
         }
       },
-
       email: {
-        value: '',
+        value: "",
         valid: false,
-        type: 'textinput',
+        type: "textinput",
         rules: {
           isRequired: true,
           isEmail: true
         },
-        keyboardType: 'email-address'
+        keyboardType: "email-address"
+      },
+      phoneNumber: {
+        value: "",
+        valid: false,
+        type: "textinput",
+        rules: {
+          isRequired: true,
+          isEmail: true
+        },
+        keyboardType: "decimal-pad"
       },
       password: {
-        value: '',
+        value: "",
         valid: false,
-        type: 'textinput',
+        type: "textinput",
         rules: {
           isRequired: true,
           minLength: 6
         }
       },
       confirmPassword: {
-        value: '',
+        value: "",
         valid: false,
-        type: 'textinput',
+        type: "textinput",
         rules: {
-          confirmPass: 'password'
+          confirmPass: "password"
         }
       }
     }
   };
 
   confirmPassword = () =>
-    this.state.type != 'Login' ? (
+    this.state.type != "Login" ? (
       <Input
         placeholder="Confirm password"
         placeholderTextColor="#cecece"
         type={this.state.form.confirmPassword.type}
         value={this.state.form.confirmPassword.value}
-        autoCapitalize={'none'}
-        onChangeText={value => this.updateInput('confirmPassword', value)}
+        autoCapitalize={"none"}
+        onChangeText={value => this.updateInput("confirmPassword", value)}
         secureTextEntry
       />
     ) : null;
 
-  username = () =>
-    this.state.type != 'Login' ? (
+  name = () =>
+    this.state.type != "Login" ? (
       <Input
-        placeholder="Username"
+        placeholder="Name and Surname"
         placeholderTextColor="#cecece"
-        type={this.state.form.username.type}
-        value={this.state.form.username.value}
-        autoCapitalize={'none'}
-        onChangeText={value => this.updateInput('username', value)}
+        type={this.state.form.name.type}
+        value={this.state.form.name.value}
+        autoCapitalize={"none"}
+        onChangeText={value => this.updateInput("name", value)}
+      />
+    ) : null;
+
+  phoneNumber = () =>
+    this.state.type != "Login" ? (
+      <Input
+        placeholder="Phone Number"
+        placeholderTextColor="#cecece"
+        type={this.state.form.phoneNumber.type}
+        value={this.state.form.phoneNumber.value}
+        autoCapitalize={"none"}
+        onChangeText={value => this.updateInput("phoneNumber", value)}
+        keyboardType={this.state.form.phoneNumber.keyboardType}
       />
     ) : null;
 
@@ -80,9 +102,9 @@ class AuthForm extends React.Component {
     const type = this.state.type;
 
     this.setState({
-      type: type === 'Login' ? 'Register' : 'Login',
-      action: type === 'Login' ? 'Register' : 'Login',
-      actionMode: type === 'Login' ? 'Login' : 'Register'
+      type: type === "Login" ? "Register" : "Login",
+      action: type === "Login" ? "Register" : "Login",
+      actionMode: type === "Login" ? "Login" : "Register"
     });
   };
 
@@ -119,9 +141,9 @@ class AuthForm extends React.Component {
     const formCopy = this.state.form;
 
     for (let key in formCopy) {
-      if (this.state.type === 'Login') {
+      if (this.state.type === "Login") {
         //Login
-        if (key !== 'confirmPassword') {
+        if (key !== "confirmPassword") {
           isFormValid = isFormValid && formCopy[key].valid;
           formToSubmit[key] = formCopy[key].value;
         }
@@ -131,40 +153,29 @@ class AuthForm extends React.Component {
         formToSubmit[key] = formCopy[key].value;
       }
     }
-
-    if (isFormValid) {
-      if (this.state.type === 'Login') {
-        this.props.signIn(formToSubmit);
-      } else {
-        this.props.signUp(formToSubmit);
-      }
-    } else {
-      this.setState({
-        hasErrors: true
-      });
-    }
   };
 
   render() {
     return (
       <View>
-        {this.username()}
+        {this.name()}
         <Input
           placeholder="E-mail"
           placeholderTextColor="#cecece"
           type={this.state.form.email.type}
           value={this.state.form.email.value}
-          autoCapitalize={'none'}
+          autoCapitalize={"none"}
           keyboardType={this.state.form.email.keyboardType}
-          onChangeText={value => this.updateInput('email', value)}
+          onChangeText={value => this.updateInput("email", value)}
         />
+        {this.phoneNumber()}
         <Input
           placeholder="Password"
           placeholderTextColor="#cecece"
           type={this.state.form.password.type}
           value={this.state.form.password.value}
-          autoCapitalize={'none'}
-          onChangeText={value => this.updateInput('password', value)}
+          autoCapitalize={"none"}
+          onChangeText={value => this.updateInput("password", value)}
           secureTextEntry
         />
 
@@ -177,7 +188,7 @@ class AuthForm extends React.Component {
             <Button
               title={this.state.action}
               onPress={this.submitUser}
-              color={'#D99C9C'}
+              color={"#D99C9C"}
             />
           </View>
 
@@ -185,7 +196,7 @@ class AuthForm extends React.Component {
             <Button
               title={this.state.actionMode}
               onPress={this.changeFormType}
-              color={'#D99C9C'}
+              color={"#D99C9C"}
             />
           </View>
 
@@ -207,12 +218,12 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 30,
     padding: 10,
-    backgroundColor: '#f44336'
+    backgroundColor: "#f44336"
   },
   errorLabel: {
-    color: 'black',
-    textAlignVertical: 'center',
-    textAlign: 'center'
+    color: "black",
+    textAlignVertical: "center",
+    textAlign: "center"
   },
   button: {
     ...Platform.select({
