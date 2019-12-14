@@ -1,11 +1,11 @@
-import React from 'react';
-import { View, Image } from 'react-native';
+import React from "react";
+import { View, Image } from "react-native";
 
-import Logo from '../../../assets/images/logo.png';
+import Logo from "../../../assets/images/logo.png";
 
 const LogoComponent = () => {
   return (
-    <View style={{ alignItems: 'center' }}>
+    <View style={{ alignItems: "center" }}>
       <Image
         source={Logo}
         style={{

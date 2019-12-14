@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, StyleSheet, Button, Platform } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  Platform,
+  KeyboardAvoidingView
+} from "react-native";
 
 import Input from "../../utils/forms/input";
 import Validation from "../../utils/forms/validation";
@@ -36,7 +43,7 @@ class AuthForm extends React.Component {
         type: "textinput",
         rules: {
           isRequired: true,
-          isEmail: true
+          minLength: 10
         },
         keyboardType: "decimal-pad"
       },
@@ -111,7 +118,7 @@ class AuthForm extends React.Component {
   formHasErrors = () =>
     this.state.hasErrors ? (
       <View style={styles.errorContainer}>
-        <Text style={styles.errorLabel}>Opps, check your info</Text>
+        <Text style={styles.errorLabel}>Opps, check your infos</Text>
       </View>
     ) : null;
 
@@ -157,7 +164,7 @@ class AuthForm extends React.Component {
 
   render() {
     return (
-      <View>
+      <KeyboardAvoidingView behavior="height" enabled>
         {this.name()}
         <Input
           placeholder="E-mail"
@@ -188,7 +195,7 @@ class AuthForm extends React.Component {
             <Button
               title={this.state.action}
               onPress={this.submitUser}
-              color={"#D99C9C"}
+              color={"#20b2aa"}
             />
           </View>
 
@@ -196,19 +203,11 @@ class AuthForm extends React.Component {
             <Button
               title={this.state.actionMode}
               onPress={this.changeFormType}
-              color={"#D99C9C"}
+              color={"#20b2aa"}
             />
           </View>
-
-          {/* <View style={styles.button}>
-            <Button
-              title="Home Page"
-              onPress={() => this.props.goNext()}
-              color={"red"}
-            />
-          </View> */}
         </View>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }

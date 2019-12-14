@@ -10,13 +10,7 @@ import {
   KeyboardAvoidingView
 } from "react-native";
 import { Avatar } from "react-native-elements";
-import {
-  Ionicons,
-  MaterialCommunityIcons,
-  FontAwesome5
-} from "react-native-vector-icons";
-
-import ImagePicker from "react-native-image-picker";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 class Profile extends React.Component {
   constructor(props) {
@@ -47,32 +41,6 @@ class Profile extends React.Component {
     });
   };
 
-  changeAvatar = () => {
-    options = {
-      title: "",
-      cameraType: "front",
-      storageOptions: {
-        skipBackup: true,
-        path: "images"
-      }
-    };
-
-    ImagePicker.showImagePicker(options, response => {
-      if (response.didCancel) {
-        console.warn("Really ?");
-      } else if (response.error) {
-        console.warn(response.error);
-      } else {
-        this.setState({
-          user: {
-            ...this.state.user,
-            avataruri: response.uri
-          }
-        });
-      }
-    });
-  };
-
   render() {
     return (
       <KeyboardAvoidingView style={styles.container} behavior="height" enabled>
@@ -86,7 +54,7 @@ class Profile extends React.Component {
             showEditButton
             onPress={() => Alert.alert("Avatar")}
             onEditPress={() => {
-              this.changeAvatar();
+              Alert.alert("Edit Press");
             }}
           />
         </View>
@@ -103,13 +71,6 @@ class Profile extends React.Component {
             editable={this.state.editable}
             style={styles.input}
           />
-          <TextInput
-            placeholder="E-mail"
-            value={this.state.user.email}
-            editable={this.state.editable}
-            style={styles.input}
-            autoCapitalize="characters"
-          />
 
           <TextInput
             placeholder="Phone Number"
@@ -119,25 +80,12 @@ class Profile extends React.Component {
             autoCapitalize="characters"
           />
         </View>
-        <View style={styles.button}>
-          <MaterialCommunityIcons
-            name="account-edit"
-            onPress={this.changeEditable}
-            color={"black"}
-            size={50}
-          />
-        </View>
-        <View style={styles.addGift}>
-          <Ionicons
-            name={Platform.OS === "ios" ? "ios-add" : "md-add"}
-            size={50}
-          />
-        </View>
+
         <View style={styles.call}>
-          <FontAwesome5
-            name={"gifts"}
+          <Ionicons
+            name={Platform.OS === "ios" ? "ios-call" : "md-call"}
             size={50}
-            color={"red"}
+            color={"green"}
             onPress={() => this.onPressTel(this.state.user.telNum)}
           />
         </View>
@@ -187,12 +135,6 @@ const styles = StyleSheet.create({
   },
   call: {
     position: "absolute",
-    bottom: 20
-  },
-  addGift: {
-    marginTop: 30,
-    position: "absolute",
-    left: 20,
     bottom: 20
   }
 });

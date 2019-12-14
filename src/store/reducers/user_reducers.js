@@ -1,17 +1,19 @@
 export default function(state = {}, action) {
   switch (action.type) {
-    case "SIGN_IN":
+    case "LOGIN":
       return {
         ...state,
         auth: {
-          email: action.payload.email || false
+          email: action.payload.email || false,
+          token: action.payload.token || false
         }
       };
-    case "SIGN_UP":
+    case "REGISTER":
       return {
         ...state,
         auth: {
-          email: action.payload.email || false
+          email: action.payload.email || false,
+          token: action.payload.token || false
         }
       };
   }

@@ -1,10 +1,11 @@
-import React from 'react';
-import { StyleSheet, View, Button, Alert, ScrollView } from 'react-native';
-import { ListItem } from 'react-native-elements';
-import { AntDesign } from 'react-native-vector-icons/';
-import Swipeout from 'react-native-swipeout';
+import React from "react";
+import { StyleSheet, View, Button, Alert, ScrollView } from "react-native";
+import { ListItem } from "react-native-elements";
+import { AntDesign, Ionicons } from "react-native-vector-icons/";
+import Swipeout from "react-native-swipeout";
 
-import Notification from './notification';
+import Notification from "./notification";
+import { Platform } from "@unimodules/core";
 
 let _this = null;
 class Home extends React.Component {
@@ -14,18 +15,18 @@ class Home extends React.Component {
       isModalOpened: false,
       list: [
         {
-          name: 'Amy Farha',
+          name: "Amy Farha",
           avatar_url:
-            'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-          subtitle: 'Vice President',
-          date: '02/01/2019'
+            "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
+          subtitle: "Vice President",
+          date: "02/01/2019"
         },
         {
-          name: 'Chris Jackson',
+          name: "Chris Jackson",
           avatar_url:
-            'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-          subtitle: 'Vice Chairman',
-          date: '02/01/2019'
+            "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+          subtitle: "Vice Chairman",
+          date: "02/01/2019"
         }
       ]
     };
@@ -40,10 +41,12 @@ class Home extends React.Component {
   }
   static navigationOptions = ({ navigation }) => {
     return {
-      title: 'Home',
+      title: "Home",
       headerRight: () => (
-        <AntDesign
-          name={'notification'}
+        <Ionicons
+          name={
+            Platform.OS === "ios" ? "ios-notifications" : "md-notifications"
+          }
           onPress={() => {
             _this.setModalVisible(true);
           }}
@@ -56,11 +59,11 @@ class Home extends React.Component {
   render() {
     const swipeButtons = [
       {
-        text: 'Delete',
-        type: 'delete',
-        backgroundColor: 'red',
+        text: "Delete",
+        type: "delete",
+        backgroundColor: "red",
         onPress: () => {
-          Alert.alert('Pressed');
+          Alert.alert("Pressed");
           console.log(this.props);
           this.setState({ list: this.state.list.splice(this.props.key, 1) });
         }
@@ -78,7 +81,7 @@ class Home extends React.Component {
               title={l.name}
               //subtitle={l.subtitle}
               onPress={() => {
-                this.props.navigation.navigate('Invitation');
+                this.props.navigation.navigate("Invitation");
               }}
               bottomDivider
               style={styles.avatar}
@@ -100,13 +103,13 @@ class Home extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center"
   },
   avatar: {
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center"
   }
 });
 

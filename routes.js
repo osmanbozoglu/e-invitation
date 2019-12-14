@@ -16,10 +16,11 @@ import SignIn from "./src/components/auth";
 import Home from "./src/components/home/home";
 import Profile from "./src/components/profile/profile";
 import Contacts from "./src/components/contact/contact";
-import Cards from "./src/components/card/card";
+import InvitationCard from "./src/components/invitationcard/invitationCard";
 import Invitation from "./src/components/home/invitation";
 import Notification from "./src/components/home/notification";
 import MyContacts from "./src/components/contact/myContacts";
+import ViewTemplate from "./src/components/invitationcard/viewTemplate";
 
 const HomeStack = createStackNavigator(
   {
@@ -68,8 +69,8 @@ const ContactTab = createMaterialTopTabNavigator(
       showIcon: true,
       inactiveBackgroundColor: "#F0F2F2",
       tabStyle: {
-        marginTop: 25,
-        backgroundColor: "#20b2aa"
+        backgroundColor: "#20b2aa",
+        paddingTop: 35
       }
     }
   }
@@ -86,7 +87,8 @@ const ContactStack = createStackNavigator(
 
 const CardStack = createStackNavigator(
   {
-    Cards: Cards
+    InvitationCard: InvitationCard,
+    ViewTemplate: ViewTemplate
   },
   {
     headerLayoutPreset: "center",
@@ -157,7 +159,7 @@ const AppStack = createBottomTabNavigator(
       inactiveBackgroundColor: "#F0F2F2",
       swipeEnabled: true
     },
-    initialRouteName: "Home"
+    initialRouteName: "Cards"
   }
 );
 
@@ -180,7 +182,7 @@ export const RootNavigator = () => {
         Auth: AuthStack
       },
       {
-        initialRouteName: "App"
+        initialRouteName: "Auth"
       }
     )
   );

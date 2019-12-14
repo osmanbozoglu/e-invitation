@@ -14,15 +14,7 @@ import InvCard from "../../../assets/images/inv.jpeg";
 class Invitation extends React.Component {
   static navigationOptions = () => {
     return {
-      title: "Invitation",
-      headerRight: () => (
-        <Ionicons
-          name={Platform.OS === "ios" ? "ios-navigate" : "md-navigate"}
-          size={25}
-          onPress={() => Alert.alert("Hello")}
-          style={{ paddingRight: 30 }}
-        />
-      )
+      title: "Invitation"
     };
   };
   state = {

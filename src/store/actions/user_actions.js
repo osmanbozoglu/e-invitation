@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export function signUp() {
+export function register() {
   return {
-    type: "SIGN_UP",
+    type: "REGISTER",
     payload: {
       user: "osman@gmail.com",
       token: "dsfasdfasdf"
@@ -10,9 +10,9 @@ export function signUp() {
   };
 }
 
-export function signIn() {
+export function login() {
   return {
-    type: "SIGN_IN",
+    type: "LOGIN",
     payload: {
       email: "osman@gmail.com",
       token: "dsfasdfasdf"
