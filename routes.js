@@ -12,7 +12,8 @@ import {
 } from "react-navigation-tabs";
 
 //SCREENS
-import SignIn from "./src/components/auth";
+import LoginForm from "./src/components/auth/loginForm";
+import RegisterForm from "./src/components/auth/registerForm";
 import Home from "./src/components/home/home";
 import Profile from "./src/components/profile/profile";
 import Contacts from "./src/components/contact/contact";
@@ -159,14 +160,17 @@ const AppStack = createBottomTabNavigator(
       inactiveBackgroundColor: "#F0F2F2",
       swipeEnabled: true
     },
-    initialRouteName: "Cards"
+    initialRouteName: "Home"
   }
 );
 
 const AuthStack = createStackNavigator(
   {
     SignIn: {
-      screen: SignIn
+      screen: LoginForm
+    },
+    SignUp: {
+      screen: RegisterForm
     }
   },
   {

@@ -3,23 +3,23 @@ const validation = (value, rules, form) => {
 
   for (let rule in rules) {
     switch (rule) {
-      case 'isRequired':
+      case "isRequired":
         valid = valid && validateRequired(value);
         break;
-      case 'isEmail':
+      case "isEmail":
         valid = valid && validateEmail(value);
         break;
-      case 'minLength':
+      case "minLength":
         valid = valid && validateMinLength(value, rules[rule]);
         break;
-      case 'maxLength':
+      case "maxLength":
         valid = valid && validateMaxLength(value, rules[rule]);
         break;
-      case 'confirmPass':
+      case "confirmPass":
         valid =
           valid && validateConfirmPass(value, form[rules.confirmPass].value);
         break;
-      case 'phoneNumber':
+      case "phoneNumber":
         valid = valid && validatePhoneNumber(value, form[rule]);
       default:
         valid = true;
@@ -29,7 +29,7 @@ const validation = (value, rules, form) => {
 };
 
 const validateRequired = value => {
-  if (value !== '') {
+  if (value !== "") {
     return true;
   }
   return false;
@@ -56,6 +56,10 @@ const validateMaxLength = (value, ruleValue) => {
 
 const validateConfirmPass = (confirmPass, pass) => {
   return confirmPass === pass;
+};
+
+const validatePhoneNumber = phoneNumber => {
+  return phoneNumber.length === 11;
 };
 
 export default validation;
