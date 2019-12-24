@@ -6,8 +6,7 @@ import {
   Button,
   Platform,
   KeyboardAvoidingView,
-  Alert,
-  AsyncStorage
+  ScrollView
 } from "react-native";
 
 import Input from "../../utils/forms/input";
@@ -15,8 +14,9 @@ import Validation from "../../utils/forms/validation";
 
 import AuthLogo from "./authLogo";
 
-import Service from "../../utils/service/service";
-import { ScrollView } from "react-native-gesture-handler";
+import { connect } from "react-redux";
+import { signIn } from "../../store/actions/user_actions";
+import { bindActionCreators } from "redux";
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -79,58 +79,18 @@ class LoginForm extends React.Component {
     let formToSubmit = {};
     const formCopy = this.state.form;
 
-    if (this.state.type === "Login") {
-      //Login
-      isFormValid = isFormValid && formCopy["email"].valid;
-      formToSubmit["email"] = formCopy["email"].value;
-
-      isFormValid = isFormValid && formCopy["password"].valid;
-      formToSubmit["password"] = formCopy["password"].value;
-    } else {
-      //Register
-      // NOT COMPLETED
-      isFormValid = isFormValid && formCopy["email"].valid;
-      formToSubmit["email"] = formCopy["email"].value;
-
-      isFormValid = isFormValid && formCopy["password"].valid;
-      formToSubmit["password"] = formCopy["password"].value;
+    for (let key in formCopy) {
+      isFormValid = isFormValid && formCopy[key].valid;
+      formToSubmit[key] = formCopy[key].value;
     }
 
     if (isFormValid) {
-      if (this.state.type === "Login") {
-        if (AsyncStorage.getItem("loginDetails") != null) {
-          console.log("YEAP");
-        }
-        Service.signin(formToSubmit)
-          .then(response => console.log(response))
-          .catch(error => console.log(error));
-        this.props.goNext();
-      } else {
-        this.saveData(formToSubmit["email"], formToSubmit["password"]);
-        Service.signup(formToSubmit)
-          .then(response => console.log(response))
-          .catch(error => console.log(error));
-      }
+      this.props.signIn(formToSubmit);
     } else {
       this.setState({
         hasErrors: true
       });
     }
-  };
-
-  saveData = async (email, password) => {
-    //save data with asyncstorage
-    let loginDetails = {
-      email: email,
-      password: password
-    };
-
-    AsyncStorage.setItem("loginDetails", JSON.stringify(loginDetails));
-  };
-
-  getData = async () => {
-    let loginDetails = await AsyncStorage.getItem("loginDetails");
-    let ld = JSON.parse(loginDetails);
   };
 
   render() {
@@ -176,6 +136,13 @@ class LoginForm extends React.Component {
                 color={"#20b2aa"}
               />
             </View>
+            <View style={styles.button}>
+              <Button
+                title={"Go To Home"}
+                onPress={() => this.props.navigation.navigate("App")}
+                color={"#20b2aa"}
+              />
+            </View>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -213,4 +180,14 @@ const styles = StyleSheet.create({
   }
 });
 
-export default LoginForm;
+function mapStateToProps(state) {
+  return {
+    User: state.User
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ signIn }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

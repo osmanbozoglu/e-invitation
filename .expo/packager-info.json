@@ -2,9 +2,9 @@
   "devToolsPort": 19002,
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 7542,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "packagerPid": 13963,
+  "expoServerNgrokUrl": "https://yw-mky.osmanbozoglu.e-invitation.exp.direct",
+  "packagerNgrokUrl": "https://packager.yw-mky.osmanbozoglu.e-invitation.exp.direct",
+  "ngrokPid": 13998,
   "webpackServerPort": null
 }

@@ -1,5 +1,12 @@
 import React from "react";
-import { StyleSheet, View, Button, Alert, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Button,
+  Alert,
+  ScrollView,
+  AsyncStorage
+} from "react-native";
 import { ListItem } from "react-native-elements";
 import { AntDesign, Ionicons } from "react-native-vector-icons/";
 import Swipeout from "react-native-swipeout";
@@ -56,6 +63,7 @@ class Home extends React.Component {
       )
     };
   };
+
   render() {
     const swipeButtons = [
       {
@@ -69,6 +77,11 @@ class Home extends React.Component {
         }
       }
     ];
+
+    let loginDetails = AsyncStorage.getItem("loginDetails");
+
+    console.log(loginDetails.email);
+    console.log(loginDetails.password);
 
     return (
       <ScrollView>

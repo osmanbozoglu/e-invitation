@@ -5,25 +5,37 @@ import {
   StyleSheet,
   Button,
   Platform,
-  KeyboardAvoidingView,
-  AsyncStorage
+  KeyboardAvoidingView
 } from "react-native";
 
 import Input from "../../utils/forms/input";
 import Validation from "../../utils/forms/validation";
 import AuthLogo from "./authLogo";
 
-import Service from "../../utils/service/service";
 import { ScrollView } from "react-native-gesture-handler";
+
+import { connect } from "react-redux";
+import { singUp } from "../../store/actions/user_actions";
+import { bindActionCreators } from "redux";
 
 class RegisterForm extends React.Component {
   constructor(props) {
     super(props);
+    console.log(this.props);
 
     this.state = {
       hasErrors: false,
       form: {
         name: {
+          value: "",
+          valid: false,
+          type: "textinput",
+          rules: {
+            isRequired: true,
+            minLength: 3
+          }
+        },
+        surname: {
           value: "",
           valid: false,
           type: "textinput",
@@ -109,29 +121,12 @@ class RegisterForm extends React.Component {
     }
 
     if (isFormValid) {
-      this.saveData(formToSubmit["email"], formToSubmit["password"]);
-      Service.signup(formToSubmit)
-        .then(response => console.log(response))
-        .catch(error => console.log(error));
+      this.props.singUp(formToSubmit);
     } else {
       this.setState({
         hasErrors: true
       });
     }
-  };
-
-  saveData = async (email, password) => {
-    //save data with asyncstorage
-    let loginDetails = {
-      email: email,
-      password: password
-    };
-    AsyncStorage.setItem("loginDetails", JSON.stringify(loginDetails));
-  };
-
-  getData = async () => {
-    let loginDetails = await AsyncStorage.getItem("loginDetails");
-    let ld = JSON.parse(loginDetails);
   };
 
   render() {
@@ -150,10 +145,10 @@ class RegisterForm extends React.Component {
           <Input
             placeholder="Surname"
             placeholderTextColor="#cecece"
-            type={this.state.form.name.type}
-            value={this.state.form.name.value}
+            type={this.state.form.surname.type}
+            value={this.state.form.surname.value}
             autoCapitalize={"none"}
-            onChangeText={value => this.updateInput("name", value)}
+            onChangeText={value => this.updateInput("surname", value)}
           />
           <Input
             placeholder="E-mail"
@@ -247,4 +242,14 @@ const styles = StyleSheet.create({
   }
 });
 
-export default RegisterForm;
+function mapStateToProps(state) {
+  return {
+    User: state.User
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ singUp }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterForm);

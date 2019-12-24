@@ -1,13 +1,15 @@
 import React from "react";
-import { StyleSheet, ScrollView, Text } from "react-native";
+import { StyleSheet, ScrollView, Image } from "react-native";
 import { Card, Button } from "react-native-elements";
+
+import Templates from "./templates";
 
 class InvitationCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       cardInfos: {
-        imageLocation: "../../../assets/images/cards/template1.jpg",
+        imageLocation: "./cards/template1.jpg",
         imageInfo: {}
       }
     };
@@ -18,7 +20,7 @@ class InvitationCard extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <Card image={require("../../../assets/images/cards/template1.jpg")}>
+        <Card image={Templates.templateOne}>
           <Button
             type="solid"
             buttonStyle={{

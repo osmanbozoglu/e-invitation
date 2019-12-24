@@ -13,7 +13,8 @@ import { Avatar } from "react-native-elements";
 import {
   Ionicons,
   MaterialCommunityIcons,
-  FontAwesome5
+  FontAwesome5,
+  AntDesign
 } from "react-native-vector-icons";
 
 import ImagePicker from "react-native-image-picker";
@@ -33,8 +34,18 @@ class Profile extends React.Component {
       editable: false
     };
   }
-  static navigationOptions = {
-    title: "Profile"
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: "Profile",
+      headerRight: () => (
+        <AntDesign
+          name="logout"
+          onPress={() => navigation.navigate("Auth")}
+          color={"black"}
+          size={22}
+        />
+      )
+    };
   };
 
   onPressTel = number => {
@@ -131,6 +142,7 @@ class Profile extends React.Component {
           <Ionicons
             name={Platform.OS === "ios" ? "ios-add" : "md-add"}
             size={50}
+            onPress={() => this.props.navigation.navigate("Auth")}
           />
         </View>
         <View style={styles.call}>
