@@ -21,7 +21,6 @@ import { bindActionCreators } from "redux";
 class RegisterForm extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
 
     this.state = {
       hasErrors: false,
@@ -130,6 +129,7 @@ class RegisterForm extends React.Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <KeyboardAvoidingView behavior="height" style={styles.container}>
         <ScrollView>

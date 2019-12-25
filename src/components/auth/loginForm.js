@@ -94,6 +94,7 @@ class LoginForm extends React.Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <KeyboardAvoidingView behavior="height" style={styles.container}>
         <ScrollView>
